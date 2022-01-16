@@ -1,0 +1,68 @@
+#!/usr/bin/make -f
+
+VERSION=0.4
+DESTDIR=$(CURDIR)/debian/xmonobut
+DEBIANDIR=$(DESTDIR)/DEBIAN
+
+configure: configure-stamp
+configure-stamp:
+	./configure --prefix=/usr \
+                    --mandir=\$${prefix}/share/man 
+	touch configure-stamp
+
+build: build-stamp
+
+build-stamp: configure-stamp 
+
+	$(MAKE)
+	touch build-stamp
+
+clean:
+	rm -f build-stamp configure-stamp
+	rm -fr $(DESTDIR)
+	rm -f debian/files debian/substvars
+	-$(MAKE) distclean
+
+install: build
+	rm -fr $(DESTDIR)
+	$(MAKE) install-strip DESTDIR=$(DESTDIR)
+	strip --remove-section=.comment --remove-section=.note \
+	      $(DESTDIR)/usr/bin/xmonobut
+
+distclean: clean
+
+binary-indep: build install
+
+binary-arch: build install
+
+	mkdir -p $(DEBIANDIR)
+	
+	# Figure out deps
+	dpkg-shlibdeps ./xmonobut
+
+	# Generate control file
+	dpkg-gencontrol -isp -ldebian/changelog -Pdebian/xmonobut
+
+	cp debian/postinst $(DEBIANDIR)
+	cp debian/prerm $(DEBIANDIR)
+
+	# Compress manpages
+	gzip -9 $(DESTDIR)/usr/share/man/man1/xmonobut.1
+
+	# Docs
+	mkdir -p $(DESTDIR)/usr/share/doc/xmonobut/
+	cp README $(DESTDIR)/usr/share/doc/xmonobut/
+	gzip -9 $(DESTDIR)/usr/share/doc/xmonobut/README
+	cp debian/copyright $(DESTDIR)/usr/share/doc/xmonobut/
+	#cp debian/changelog $(DESTDIR)/usr/share/doc/xmonobut/
+
+	# Create md5sums
+	find debian/xmonobut/usr -type f | xargs md5sum \
+	     | sed -e's/debian\/xmonobut\///' >> $(DEBIANDIR)/md5sums
+
+
+	chown -R root:root $(DESTDIR)	
+	dpkg-deb -b $(DESTDIR) ../
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

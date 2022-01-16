@@ -1,0 +1,51 @@
+.TH "xmonobut" 1
+.SH NAME
+xmonobut \- An X11 tool for changing mouse button behavior. 
+.SH SYNOPSIS
+.B xmonobut
+-help
+.br
+.B xmonobut
+[options...]
+.SH DESCRIPTION
+Xmonobut is a simple X11 application that helps access 2nd and 3rd
+mouse buttons on touchscreen / single mouse button ( such as Macs ) machines.
+
+The 'missing' buttons are made accessible by briefly modifying the
+mouses button map. This can be done by clicking on the xmonobut window
+to 'rotate' the mouse buttons or xmonobut can be bound to a key, so
+that holding this key and clicking will produce an alternate button click.
+.SH OPTIONS
+.TP
+.B \-display
+Specify the XServer for xmonobut to connect to. Defaults to
+$DISPLAY environmental variable. 
+.TP
+.B \-k <keycode>
+keycode to grab. Tap once for right mouse button , quickly tap twice 
+for middle button ( disabled if middle button keycode selected ).
+.TP
+.B \-t <value>   
+Time in milliseconds to catch double clicks. Defaults to 200.
+.TP
+.B \-m <keycode> 
+Keycode to grab for middle mouse button.
+.TP
+.B \-n           
+Do not display dock window.
+.TP
+.B \-c           
+Do not change cursor when button is changed. 
+.TP
+.B \-help
+ Display a brief help message and exit. 
+.SH MORE INFO
+Visit http://www.handhelds.org/~mallum/matchbox/
+.SH "SEE ALSO"
+X(7)
+.SH BUGS
+If xmonobut is bound to a key, releasing the mouse button before the
+bound key may cause unpredictable results.
+
+If you find others, please report to mallum@handhelds.org.
+

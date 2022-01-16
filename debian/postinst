@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+if [ "$1" = "configure" ]; then
+	if [ -d /usr/doc ] && [ ! -e /usr/doc/xmonobut ] && [ -d /usr/share/doc/xmonobut ]; then
+		ln -sf ../share/doc/xmonobut /usr/doc/xmonobut
+	fi
+fi

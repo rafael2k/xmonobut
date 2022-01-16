@@ -1,0 +1,49 @@
+xmonobut readme
+
+Xmonobut is a simple X11 application that helps access 2nd and 3rd
+mouse buttons on touchscreen / single mouse button ( such as macs ) machines.
+
+The 'missing' buttons are made accessable by breifly modifying the
+mouses button map. This can be done by clicking on the xmonobut window
+to 'rotate' the mouse buttons or xmonobut can be bound to a key, so
+that holding this key and clicking will produce an alternate button click.
+
+
+Usage: 
+
+xmonobut [options...] 
+
+where options are;
+
+        -d <display> Xserver to connect to.
+
+        -k <keycode> keycode to grab. Tap once for right mouse button
+                     , quickly tap twice for middle button ( disabled
+                     if middle button keycode selected ).
+
+        -t <value>   Time in milliseconds to catch double clicks
+                     Defauts to 200.
+
+        -m <keycode> Keycode to grab for middle mouse button.
+
+        -n           Do not display dock window.
+
+        -c           Do not change cursor.
+
+        -r           Align window right in dock ( matchbox only )
+
+
+Bugs:
+
+If xmonobut is bound to a key, releasing the mouse button before the
+bound key may cause unpredictable results.
+
+
+Author:
+
+Matthew Allum ( mallum@handhelds.org )
+
+
+Licence:
+
+GPL

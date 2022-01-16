@@ -1,0 +1,9 @@
+Package: @PACKAGE@
+Section: x11
+Priority: optional
+Version: @VERSION@
+Architecture: arm
+Maintainer: mallum <mallum@handhelds.org> 
+Depends: xlibs
+Description: A tool to modify mouse button behaviour.
+.

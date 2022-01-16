@@ -1,0 +1,12 @@
+Source: xmonobut
+Section: x11
+Priority: optional
+Maintainer: Matthew Allum <mallum@10.am>
+Standards-Version: 3.5.2
+
+Package: xmonobut
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: A simple X11 application that modifys mouse button mapping.
+ Xmonobut is a simple X11 application that helps access 2nd and 3rd
+ mouse buttons on touchscreen / single mouse button ( such as macs ) machines.
